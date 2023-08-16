@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 router.get("/:pid", async (req, res) => {
     const id = parseInt(req.params.pid);
     const product = await manager.getProductsById(id);
-    if (product === "Not Found") {
+    if (product === "No encontrado") {
         res.status(400).json({ message: "Producto no encontrado" });
     } else if (product) {
         res.status(200).json(product);
@@ -32,9 +32,9 @@ router.get("/:pid", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         const product = await manager.addProduct(req.body);
-        if (product === "The insert code already exists") {
+        if (product === "El codigo ya existe") {
             res.status(400).json({ message: "Error al crear el producto", product });
-        } else if (product === "Complete all fields") {
+        } else if (product === "Completa todos los campos") {
             res.status(400).json({ message: "Error al crear el producto", product });
         } else {
             res.status(201).json({ message: "Producto creado", product });
@@ -56,7 +56,7 @@ router.put("/:pid", async (req, res) => {
 router.delete("/:pid", async (req, res) => {
     const id = parseInt(req.params.pid);
     const product = await manager.deleteProduct(id);
-    if (product === `Can't find product with id : ${id}`) {
+    if (product === `No se encontro un producto con el ID: ${id}`) {
         res.status(400).json({ message: "Error al eliminar el producto", product });
     } else if (product) {
         res.status(200).json({ message: "Producto eliminado", product });
